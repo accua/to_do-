@@ -27,4 +27,18 @@ describe(Task) do
 
     end
   end
+
+  describe(".all") do
+    it("is empty at first, and will return all tasks") do
+      expect(Task.all()).to(eq([]))
+    end
+  end
+
+  describe("#save") do
+    it("saves a task to the array") do
+      test_task = Task.new({:description => "learn SQL"})
+      test_task.save()
+      expect(Task.all()).to(eq([test_task]))
+    end
+  end
 end
