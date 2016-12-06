@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h1><%= @list.name %></h1>
+
+      <% if @list.get_tasks.any? %>
+
+        <ol>
+          <% @list.get_tasks.each do |task| %>
+            <li><%= task.description %></li>
+          <% end %>
+        </ol>
+
+      <% else %>
+        <p>There are no tasks on this list!</p>
+      <% end %>
+
+    </div>
+    <div class="col-sm-4">
+      <form action="/list/:id" method="post">
+        <div class="form-group">
+          <input name="list_id" type="hidden" value="<%= @list.id %>">
+          <label for="description">Enter a task:</label>
+          <input name="description" type="text">
+          <button class="btn" type="submit">Add Task</button>
+        </div>
+      </form>
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+      <hr>
+     <a href="/"><button class="btn">Home</a>
+  </div>
+</div>

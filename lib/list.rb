@@ -33,4 +33,14 @@ class List
       task.list_id == @id
     end
   end
+
+  def self.find(id)
+    found_list = nil
+    List.all.each do |list|
+      if list.id == id
+        found_list = list
+      end
+    end
+    found_list
+  end
 end

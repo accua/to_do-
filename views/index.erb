@@ -1,0 +1,28 @@
+<h1>To Do</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <% if @lists.any?() %>
+        <h3>Here are your lists:</h3>
+
+        <ul>
+          <% @lists.each() do |list| %>
+            <li><a href = "/lists/<%= list.id() %>"><%= list.name() %></a></li>
+          <% end %>
+        </ul>
+
+        <% else %>
+        <p>There are no lists yet!</p>
+        <% end %>
+    </div>
+    <form action="/" method="post">
+      <div class="form-group">
+        <div class="col-sm-4">
+          <label for="name">Enter The Name Of Your List:</label>
+          <input type="text" name="name" autofocus>
+        </div>
+        <button class="btn btn-success" type="submit">Add List</button>
+      </div>
+    </form>
+  </div>
+</div>

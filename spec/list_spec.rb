@@ -61,4 +61,14 @@ describe(List) do
       expect(@learning_list.get_tasks).to eq [@task1, @task3]
     end
   end
+
+  describe(".find") do
+    it("returns a list by its ID") do
+      @list1 = List.new({:name => "test1", :id => nil})
+      @list1.save()
+      @list2 = List.new({:name => "test2", :id => nil})
+      @list2.save()
+      expect(List.find(@list1.id())).to(eq(@list1))
+    end
+  end
 end
