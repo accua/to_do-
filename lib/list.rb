@@ -1,9 +1,11 @@
 class List
-  attr_reader(:name, :id)
+  attr_reader(:name, :id, :due)
 
   define_method(:initialize) do |attrs|
     @name = attrs.fetch(:name)
-    @id = attrs.fetch(:id)
+    @id = attrs.fetch(:id) rescue nil
+    @due = attrs.fetch(:due) rescue nil
+
   end
 
   define_singleton_method(:all) do
@@ -22,7 +24,13 @@ class List
     @id = result.first().fetch("id").to_i()
   end
 
-  define_method(:==) do |another_list|
-    @name == another_list.name and @id == another_list.id
+  define_method(:==) do |other|
+    @name == other.name and @id == other.id
+  end
+
+  define_method(:get_tasks) do
+    Task.all.keep_if do |task|
+      task.list_id == @id
+    end
   end
 end

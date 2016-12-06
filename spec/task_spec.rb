@@ -1,44 +1,27 @@
-require('rspec')
-require('task')
-require('pg')
-
-DB = PG.connect({:dbname => 'todo_test'})
-
-RSpec.configure do |config|
-  config.after(:each) do
-    DB.exec("DELETE FROM tasks *;")
-  end
-end
+require('spec_helper')
 
 describe(Task) do
-  before(:each) do
-
+  before(:all) do
+    @learning_list = List.new({:name => "Coding Learning List"})
+    @task1 = Task.new({:description => "learn SQL", :list_id => 1})
+    @task1_copy = Task.new({:description => "learn SQL", :list_id => 1})
   end
   describe(":==") do
     it('is the same task if it has the same description') do
-      task1 = Task.new({:description => "learn SQL"})
-      task2 = Task.new({:description => "learn SQL"})
-      expect(task1).to eq task2
-    end
-  end
-
-  describe("#initialize") do
-    it('will initialize tasks properly') do
-
+      expect(@task1).to eq @task1_copy
     end
   end
 
   describe(".all") do
     it("is empty at first, and will return all tasks") do
-      expect(Task.all()).to(eq([]))
+      expect(Task.all).to eq []
     end
   end
 
   describe("#save") do
     it("saves a task to the array") do
-      test_task = Task.new({:description => "learn SQL"})
-      test_task.save()
-      expect(Task.all()).to(eq([test_task]))
+      @task1.save()
+      expect(Task.all).to eq [@task1]
     end
   end
 end
