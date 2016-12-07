@@ -34,7 +34,7 @@ class List
     end
   end
 
-  def self.find(id)
+  define_singleton_method(:find) do |id|
     found_list = nil
     List.all.each do |list|
       if list.id == id

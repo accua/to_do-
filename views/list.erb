@@ -17,17 +17,15 @@
 
     </div>
     <div class="col-sm-4">
-      <form action="/list/:id" method="post">
+      <form action="/list/:id/tasks" method="post">
         <div class="form-group">
           <input name="list_id" type="hidden" value="<%= @list.id %>">
-          <label for="description">Enter a task:</label>
-          <input name="description" type="text">
+          <input name="description" type="text" placeholder="Enter A Task" autofocus required>
           <button class="btn" type="submit">Add Task</button>
+          <br><br>
+          <a href="/" class="btn">Home</a>
         </div>
       </form>
     </div>
-    <br><br><br><br><br><br><br><br><br>
-      <hr>
-     <a href="/"><button class="btn">Home</a>
   </div>
 </div>

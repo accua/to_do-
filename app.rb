@@ -12,7 +12,7 @@ get("/") do
   erb(:index)
 end
 
-post("/") do
+post("/lists") do
   name = params.fetch("name")
   list = List.new(:name => name, :id => nil)
   list.save()
@@ -20,16 +20,22 @@ post("/") do
   erb(:index)
 end
 
-get("/lists/:id") do
+get("/lists/:id/tasks") do
   @list = List.find(params.fetch("id").to_i)
   erb(:list)
 end
 
-post("/list/:id") do
+post("/list/:id/tasks") do
   description = params.fetch("description")
   list_id = params.fetch("list_id").to_i
   @list = List.find(list_id)
   @task = Task.new(:description => description, :list_id => list_id)
   @task.save
   erb(:list)
+end
+
+get("/method") do
+  DB.exec("DELETE FROM tasks *;")
+  DB.exec("DELETE FROM lists *;")
+  redirect "/"
 end

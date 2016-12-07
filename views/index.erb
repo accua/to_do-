@@ -1,4 +1,6 @@
-<h1>To Do</h1>
+<div class="container">
+  <h1>To Do</h1>
+</div>
 <div class="container">
   <div class="row">
     <div class="col-sm-4">
@@ -7,21 +9,24 @@
 
         <ul>
           <% @lists.each() do |list| %>
-            <li><a href = "/lists/<%= list.id() %>"><%= list.name() %></a></li>
+            <li><a href = "/lists/<%= list.id() %>/tasks"><%= list.name() %></a></li>
           <% end %>
         </ul>
 
         <% else %>
+        <h3>Here are your lists:</h3>
+
         <p>There are no lists yet!</p>
         <% end %>
     </div>
-    <form action="/" method="post">
+    <form action="/lists" method="post">
       <div class="form-group">
         <div class="col-sm-4">
           <label for="name">Enter The Name Of Your List:</label>
           <input type="text" name="name" autofocus>
         </div>
-        <button class="btn btn-success" type="submit">Add List</button>
+        <button class="btn" type="submit">Add List</button>
+        <a class="btn" href="/method">Clear List</a>
       </div>
     </form>
   </div>
