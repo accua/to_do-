@@ -5,7 +5,11 @@ require('./lib/task')
 require('./lib/list')
 also_reload('lib/**/*.rb')
 
-DB = PG.connect({:dbname => "to_do"})
+if ENV['DATABASE_URL']
+  DB = PG.connect(ENV['DATABASE_URL'])
+else
+  DB = PG.connect({:dbname => 'to_do_test'})
+end
 
 get("/") do
   @lists = List.all()
